@@ -7,15 +7,15 @@ class InfoMessage:
     """Training information message."""
 
     training_type: str
-    duration: str
-    distance: str
-    speed: str
-    calories: str
+    duration: float
+    distance: float
+    speed: float
+    calories: float
     MESSAGE_TEMPLATE: str = ('Тип тренировки: {training_type}; '
-                             'Длительность: {duration} ч.; '
-                             'Дистанция: {distance} км; '
-                             'Ср. скорость: {speed} км/ч; '
-                             'Потрачено ккал: {calories}.'
+                             'Длительность: {duration:.3f} ч.; '
+                             'Дистанция: {distance:.3f} км; '
+                             'Ср. скорость: {speed:.3f} км/ч; '
+                             'Потрачено ккал: {calories:.3f}.'
                              )
 
     def get_message(self) -> str:
@@ -54,10 +54,10 @@ class Training:
     def show_training_info(self) -> InfoMessage:
         """Returns an information message about completed training"""
         info_data: InfoMessage = InfoMessage(self.__class__.__name__,
-                                             f'{self.duration:.3f}',
-                                             f'{self.get_distance():.3f}',
-                                             f'{self.get_mean_speed():.3f}',
-                                             f'{self.get_spent_calories():.3f}'
+                                             self.duration,
+                                             self.get_distance(),
+                                             self.get_mean_speed(),
+                                             self.get_spent_calories()
                                              )
         return info_data
 
